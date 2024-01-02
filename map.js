@@ -1,5 +1,3 @@
-var nancyCoordinates = [48.6921, 6.1844];
-
 function loadCentersFromCSV(map) {
     var csvFilePath = 'out.csv';
     fetch(csvFilePath)
