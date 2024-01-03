@@ -2,13 +2,26 @@ function loadCentersFromCSV(map) {
     var csvFilePath = 'out.csv';
     fetch(csvFilePath)
         .then(response => response.text())
-        .then(csvData => {
-            return Papa.parse(csvData, { header: true });
-        })
+        .then(csvData => Papa.parse(csvData, { header: true }))
         .then(data => {
-            placeMarkersFromCSVData(map, data.data);
+            var filteredData = filterMostRecentEntries(data.data);
+            placeMarkersFromCSVData(map, filteredData);
         })
         .catch(error => console.error('Erreur lors de la récupération des données CSV:', error));
+}
+
+function filterMostRecentEntries(data) {
+    var latestEntries = {};
+    data.forEach(entry => {
+        if (entry.N_SERVICE !== undefined) {
+            var nService = entry.N_SERVICE.toUpperCase();
+            if (!latestEntries[nService] || entry.ANNEE > latestEntries[nService].ANNEE) {
+                latestEntries[nService] = entry;
+            }
+        }
+    });
+    var filteredData = Object.values(latestEntries);
+    return filteredData;
 }
 
 function placeMarkersFromCSVData(map, csvData) {
