@@ -30,7 +30,14 @@ function placeMarkersFromCSVData(map, csvData) {
         var x = parseFloat(center.LATITUDE);
         var y = parseFloat(center.LONGITUDE);
         if (!isNaN(x) && !isNaN(y)) {
-            var marker = L.marker([x,y]).bindPopup('Centre de tri : ' + center.N_SERVICE);
+            var popupContent = `
+                <strong>Centre de tri :</strong> ${center.N_SERVICE}<br>
+                <strong>Téléphone :</strong> ${center.TEL_SERVICE || 'non renseigné'}<br>
+                <strong>Adresse :</strong> ${center.AD1_SITE || 'non renseigné'}<br>
+                <strong>Code Postal :</strong> ${center.CP_SITE || 'non renseigné'}<br>
+                <strong>Ville :</strong> ${center.L_VILLE_SITE || 'non renseigné'}
+            `;
+            var marker = L.marker([x,y]).bindPopup(popupContent);
             markers.addLayer(marker);
         } 
     });
