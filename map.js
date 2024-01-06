@@ -35,13 +35,18 @@ function placeMarkersFromCSVData(map, csvData) {
                 <strong>Téléphone :</strong> ${center.TEL_SERVICE || 'non renseigné'}<br>
                 <strong>Adresse :</strong> ${center.AD1_SITE || 'non renseigné'}<br>
                 <strong>Code Postal :</strong> ${center.CP_SITE || 'non renseigné'}<br>
-                <strong>Ville :</strong> ${center.L_VILLE_SITE || 'non renseigné'}
+                <strong>Ville :</strong> ${center.L_VILLE_SITE || 'non renseigné'}<br>
+                <button onclick="openGoogleMaps(${x}, ${y})">Itinéraire</button>
             `;
             var marker = L.marker([x,y]).bindPopup(popupContent);
             markers.addLayer(marker);
         } 
     });
     map.addLayer(markers);
+}
+
+function openGoogleMaps(latitude, longitude) {
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`);
 }
 
 function initMap() {
