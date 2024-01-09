@@ -1,6 +1,6 @@
-# PPII_2023
-## Projet PPII Enactus 
+# PPII 2023 Enactus
 
+### Pour le développement de l'application web :
 
 Mettre en place l'environnement virtuel python (à faire à la racine du répertoire git) :
 
@@ -21,3 +21,4 @@ Télécharger l'ensemble des bibliothèques nécessaires :
 Si vous avez besoin d'ajouter une bibliothèque pour le projet, n'oubliez pas de faire la commande :
 
 	pip freeze > requirements.txt
+
