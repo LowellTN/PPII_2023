@@ -9,5 +9,77 @@ h1 {
 }
 
 #map {
-    height: calc(100vh - 40px);
+    height: 100vh;
+}
+
+#sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(51, 51, 51, 0.8);
+    padding-top: 20px;
+    z-index: 999;
+}
+
+#visible-centers-list div {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+#visible-centers-list div:hover {
+    background-color: #666;
+}
+
+.star {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.star:hover::before {
+    position: absolute;
+    top: 20px;
+    right: -50px;
+    background-color: #ffcc00;
+    color: #333;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+}
+
+.star::before {
+    content: "\2605";
+    font-size: 24px;
+    color: white;
+    text-shadow: -1px 0 0 #000, 0 1px 0 #000, 1px 0 0 #000, 0 -1px 0 #000;
+    transition: color 0.5s;
+}
+
+.star.filled::before {
+    content: "\2605";
+    color: #ffcc00;
+    text-shadow: -1px 0 0 #000, 0 1px 0 #000, 1px 0 0 #000, 0 -1px 0 #000;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    top: 20%;
+    right: -30%;
+    transform: translate(0, -50%);
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.custom-popup {
+    width: 1000px;
 }
