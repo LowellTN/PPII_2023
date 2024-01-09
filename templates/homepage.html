@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./static/styles/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <title>CarTri</title>
+    </head>
+        <nav class="navbar">
+            <a href="#" class="logo"><img src="./static/images/Logo_PPII.svg" alt="Logo" height="60px" width="225px"></a>
+            <div class="navlinks">
+                <ul>
+                    <li class="active"><a href="#">Acceuil</a></li>
+                    <li><a href="map">Carte</a></li>
+                    <li><a href="#">Information</a></li>
+                </ul>
+            </div>
+            <img src="./static/images/bouton_menu.svg" alt="bouton menu" class="btn-menu" width="50px" height="50px">
+        </nav> 
+        <header></header>            
+    <body>
+        <script>
+            const menuHamburger = document.querySelector(".btn-menu")
+            const navLinks = document.querySelector(".navlinks")
+     
+            menuHamburger.addEventListener('click',()=>{
+            navLinks.classList.toggle('mobile-menu')
+            })
+        </script>
+        <section class="banniere" id="banniere">
+            <div class="contenu">
+                <h2>Pour trouver les points de recyclage près de chez vous !</h2>
+                <p>On vous propose une carte interactive qui vous permet de localiser les points de recyclage près de chez vous. 
+                    Pour le type de déchet que vous souhaitez recycler !</p>
+                <a href="#" class="btn1">Carte</a>
+                <a href="#" class="btn2">Partenaires</a>
+            </div>
+        </section>
+    </body>
+</html>    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">

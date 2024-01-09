@@ -1,5 +1,5 @@
 function loadCentersFromCSV(map) {
-    var csvFilePath = 'out.csv';
+    var csvFilePath = 'static/out.csv';
     fetch(csvFilePath)
         .then(response => response.text())
         .then(csvData => Papa.parse(csvData, { header: true }))
