@@ -50,6 +50,3 @@ def tri(liste) :
 		else :
 			eq.append(e)
 	return tri(inf) + eq + tri(sup)
-
-
-print(tri(liste))
