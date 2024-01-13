@@ -47,13 +47,16 @@ function placeMarkersFromCSVData(map, csvData) {
         if (!isNaN(x) && !isNaN(y)) {
             var popupContent = `
                 <div class="custom-popup">
+                <div class="favorite-container">
+                <button class="favorite-btn" onclick="toggleFavorite()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg></button>
+                <div class="tooltip">Ajouter aux favoris</div></div>
                 <strong>Centre de tri :</strong> ${center.N_SERVICE}<br>
                 <strong>Téléphone :</strong> ${center.TEL_SERVICE || 'non renseigné'}<br>
                 <strong>Adresse :</strong> ${center.AD1_SITE || 'non renseigné'}<br>
                 <strong>Code Postal :</strong> ${center.CP_SITE || 'non renseigné'}<br>
                 <strong>Ville :</strong> ${center.L_VILLE_SITE || 'non renseigné'}<br>
-                <div class="star" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)" onclick="toggleFavorite(this)"></div>
-                <div class="tooltip">Ajouter aux favoris</div>
                 <button onclick="openGoogleMaps(${x}, ${y})">Itinéraire</button><br>
                 <button onclick="leaveComment('${center.N_SERVICE}')">Laisser un commentaire sur ce centre</button></div>
             `; // Fonction leaveComment à définir (relier à l'espace de commentaires)
@@ -81,17 +84,14 @@ function openGoogleMaps(latitude, longitude) {
 }
 
 function toggleFavorite(starElement) {
-    starElement.classList.toggle('filled');
-}
-
-function showTooltip(starElement) {
-    var tooltip = starElement.nextElementSibling;
-    tooltip.style.display = 'block';
-}
-
-function hideTooltip(starElement) {
-    var tooltip = starElement.nextElementSibling;
-    tooltip.style.display = 'none';
+    var button = document.querySelector('.favorite-btn');
+    var tooltip = document.querySelector('.tooltip');
+    button.classList.toggle('clicked');
+    if (button.classList.contains('clicked')) {
+        tooltip.textContent = 'Retirer des favoris';
+    } else {
+        tooltip.textContent = 'Ajouter aux favoris';
+    }
 }
 
 function initMap() {
@@ -99,6 +99,7 @@ function initMap() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
+    map.attributionControl.setPosition('bottomleft');
     if (navigator.permissions && navigator.geolocation) {
         navigator.permissions.query({ name: 'geolocation'}).then(permissionStatus => {
             if (permissionStatus.state === 'granted') {
