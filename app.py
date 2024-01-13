@@ -18,6 +18,10 @@ def homepage() :
 def map() :
 	return render_template("map.html")
 
+@app.route("/dons")
+def dons():
+	return render_template("dons.html")
+
 
 # Partie tri
 # les éléments de la liste à trier sont des tuples (id, distance, - pertinence)
