@@ -8,16 +8,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-        <title>CarTri</title>
+        <title>CarTri</title> 
     </head>
     <header>
         <nav class="navbar">
-            <a href="#" class="logo"><img src="./static/images/Logo_PPII.svg" alt="Logo" height="60px" width="225px"></a>
+            <a href="/" class="logo"><img src="./static/images/Logo_PPII.svg" alt="Logo" height="60px" width="225px"></a>
             <div class="navlinks">
                 <ul>
-                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#accueil">Accueil</a></li>
                     <li><a href="map">Carte</a></li>
-                    <li><a href="#info">Information</a></li>
+                    <li><a href="#info">Informations</a></li>
                     <li><a href="dons">Faire un don</a></li>
                 </ul>
             </div>
@@ -33,13 +33,29 @@
             navLinks.classList.toggle('mobile-menu')
             })
         </script>
-        <section class="banniere" id="banniere">
+        <section class="accueil" id="accueil">
             <div class="contenu">
-                <h2>Pour trouver les points de recyclage près de chez vous !</h2>
-                <p>On vous propose une carte interactive qui vous permet de localiser les points de recyclage près de chez vous, pour le type de déchets que vous souhaitez recycler !</p>
+                <h2><span class="title">Pour trouver les points de recyclage près de chez vous !</span></h2>
+                <p><span class="text">On vous propose une carte interactive qui vous permet de localiser les points de recyclage près de chez vous, pour le type de déchets que vous souhaitez recycler !</span></p>
                 <a href="map" class="btn1">Carte</a>
                 <a href="#" class="btn2">Partenaires</a>
             </div>
+        </section>
+        <section class="info" id="info">
+            <div class="contenu">
+                <h2><span class="title">L'initiative CarTri</span></h2>
+                <p><span class="text">CarTri est une plateforme communautaire dédiée à la promotion du recyclage dans nos villes. 
+                    CarTri offre vous offres un accès à une carte interactive répertoriant les 
+                    centres de recyclage locaux, facilitant ainsi la gestion responsable des déchets. 
+                    Explorez la carte conviviale, obtenez des détails sur les centres, et rejoignez une 
+                    communauté éco-responsable. Notre engagement va au-delà de la simple accessibilité,
+                    car nous visons à sensibiliser et éduquer la communauté sur les pratiques écoresponsables. 
+                    CarTri encourage la participation active à la préservation de l'environnement en facilitant 
+                    le recyclage et en favorisant la réutilisation des matériaux. Rejoignez-nous aujourd'hui pour 
+                    un avenir plus durable avec CarTri - Pour une communauté engagée et un environnement plus propre !</span></p>
+                <a href="map" class="btn2">Créer un compte ici !</a>
+            </div>
+            
         </section>
     </body>
 </html>    <meta http-equiv="X-UA-Compatible" content="IE=edge">

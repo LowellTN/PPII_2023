@@ -10,13 +10,15 @@ body {
     background-color: #ccffbf;
 }
 
+
+
 .logo{
     display: flex;
     justify-content: center;
 }
 
 .navbar{
-    position: absolute;
+    position: fixed;
     padding: 10px;
     width: 100%;
     z-index: 1;
@@ -59,9 +61,18 @@ body {
     display: none;
 }
 
+.title {
+    font-size: 50px;
+    line-height: 80px;
+}
 
+.text {
+    font-size: 25px;
+    line-height: 40px;
+    word-spacing: 5px;
+}
 
-@media screen and (max-width:900px){
+@media screen and (max-width:1250px){
     .navbar{
         padding: 10;
     }
@@ -112,7 +123,7 @@ body {
 
 
 
-.banniere{
+.accueil{
     position: relative;
     width: 100%;
     min-height: 100vh;
@@ -123,7 +134,19 @@ body {
     background-size: cover;
 }
 
-.banniere .contenu{
+.info{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/warm-landscape.jpg);
+    background-size: cover;
+}
+
+
+.contenu{
     background-color: #fcedd2e0;
     padding: 20px;
     border-radius: 5px;
@@ -131,11 +154,13 @@ body {
     max-width: 70%;
     text-align: center;
 }
-.banniere .contenu h2{
+.contenu h2{
     color: #7c4c24;
     font-size: 3em;
     text-transform: capitalize;
 }
+
+
 .contenu p:nth-child(2){
     color: #7c4c24;
     font-size: 1.2em;
