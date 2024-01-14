@@ -18,9 +18,11 @@ def homepage() :
 def map() :
 	return render_template("map.html")
 
+
 @app.route("/dons")
 def dons():
 	return render_template("dons.html")
+
 
 
 # Partie tri
@@ -55,8 +57,6 @@ def tri(liste) :
 			eq.append(e)
 	return tri(inf) + eq + tri(sup)
 
-
-#print(tri(liste))
 
 if __name__ == '__main__':
 	app.run(debug=True)
