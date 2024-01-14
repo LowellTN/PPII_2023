@@ -42,6 +42,7 @@ function placeMarkersFromCSVData(map, csvData) {
     var visibleCentersList = document.getElementById('visible-centers-list');
     var currentBounds = map.getBounds();
     visibleCentersList.innerHTML = '';
+    var centersToShow = 0;
     csvData.forEach(center => {
         var x = parseFloat(center.LATITUDE);
         var y = parseFloat(center.LONGITUDE);
@@ -67,13 +68,18 @@ function placeMarkersFromCSVData(map, csvData) {
             });
             markers.addLayer(marker);
             if (currentBounds.contains([x,y])) {
-                var centerName = center.N_SERVICE || 'Non renseigné';
-                var listItem = document.createElement('div');
-                listItem.textContent = centerName;
-                listItem.addEventListener('click', function () {
-                map.setView([x, y], 13);
-                });
-                visibleCentersList.appendChild(listItem);
+                if (centersToShow < 20) {
+                    var centerName = center.N_SERVICE || 'Non renseigné';
+                    var listItem = document.createElement('div');
+                    listItem.textContent = centerName;
+                    listItem.addEventListener('click', function () {
+                    map.setView([x, y], 13);
+                    });
+                    visibleCentersList.appendChild(listItem);
+                    centersToShow++;
+                } else {
+                    visibleCentersList.innerHTML = '';
+                }
             }
         } 
     });
