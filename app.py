@@ -56,10 +56,7 @@ def tri(liste) :
 		else :
 			eq.append(e)
 	return tri(inf) + eq + tri(sup)
-<<<<<<< HEAD
-=======
 
 
 if __name__ == '__main__':
 	app.run(debug=True)
->>>>>>> origin/main
