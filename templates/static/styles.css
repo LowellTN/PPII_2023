@@ -84,3 +84,21 @@ h1 {
     font-size: 16px;
     padding: 10px;
 }
+
+#search-container {
+    position: fixed;
+    top: 2%;
+    right: 14%;
+    z-index: 1000;
+    display: flex;
+}
+
+#addressInput {
+    padding: 8px;
+    margin-right: 5px;
+}
+
+#searchButton {
+    padding: 8px;
+    cursor: pointer;
+}
