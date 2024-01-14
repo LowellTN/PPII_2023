@@ -1,0 +1,6 @@
+CREATE TABLE users (id integer primary key autoincrement, first_name text, last_name text, email text, login text, password text);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE centers (id integer primary key autoincrement, name text, nb_fav int, nb_click int);
+CREATE TABLE comments (id integer primary key autoincrement, id_client int, comment text);
+CREATE TABLE fav (id integer primary key autoincrement, id_client int, id_center int);
+
