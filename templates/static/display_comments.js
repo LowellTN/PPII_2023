@@ -1,3 +1,9 @@
+var commentsList = [
+    ["User1", "2022-01-14", "110", "This is a comment about the waste sorting center."],
+    ["User2", "2022-01-15", "010", "Another user's comment about the waste sorting center."],
+    // Add more comments as needed
+];
+
 function displayComments() {
     var commentsContainer = document.getElementById("commentsContainer");
 
@@ -9,8 +15,9 @@ function displayComments() {
 
         var commentHTML = `
             <div class="comment">
-                <strong>Author:</strong> ${author}<br>
-                <strong>Date:</strong> ${date}<br>
+                <div class="comment-banner">
+                    <strong>${author}</strong> - ${date}
+                </div>
                 <strong>Waste Types:</strong> ${getSelectedWasteTypes(wasteTypes)}<br>
                 <strong>Comment:</strong> ${commentText}
             </div>

@@ -27,12 +27,14 @@ body {
     box-sizing: border-box;
     background-color: #fcedd2e0;
 }
-.navbar a{
+
+.navbar a:not(.btn-signup, .btn-login) {
     color: #7c4c24;
     font-size: 2em;
     text-decoration: none;
     margin-left: 30px;
     font-weight: 700;
+    font-family: 'Bebas Neue', sans-serif;
 }
 .navbar .navlinks ul{
     align-items: center;
@@ -43,7 +45,7 @@ body {
     margin: 0 25px;
 }
 .navbar .navlinks ul li.active a{
-    color: #149c3c
+    color: #149c3c;
     font-weight: 600;
 }
 
@@ -51,6 +53,36 @@ body {
     position: absolute;
     right: 10px;
     display: none;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.btn-signup,
+.btn-login {
+    font-size: 0.8em;
+    color: #fff;
+    padding: 8px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+
+.btn-signup {
+    background: #4caf50;
+}
+
+.btn-login {
+    background: #fff;
+    color: black;
+    border: 2px solid grey;
 }
 
 

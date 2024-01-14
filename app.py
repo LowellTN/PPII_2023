@@ -39,13 +39,28 @@ def dons():
 
 @app.route("/<int:center_id>/comments")
 def comments(center_id):
+    """
     conn = get_db()
     c = conn.cursor()
     c.execute("SELECT u.username, c.date, c.type, c.content FROM comments as c, users as u WHERE c.center_id = (?) AND c.user_id = u.user_id;", (center_id,)) 
     res = c.fetchall()
     c.execute("SELECT name FROM centers WHERE id = (?)", (center_id,))
     center_name = c.fetchone()
-    return render_template("comments.html", comments = res, center_name = center_name)
+	"""
+    center_name = None
+    res = None
+    return render_template("display_comments.html", comments = res, center_name = center_name)
+
+@app.route("/<int:center_id>/make_comment", methods = ["GET", "POST"])
+def make_comment(center_id):
+    if request.method == 'GET':
+        #TODO - LOGGED IN CHECK
+        #TODO - GET USERNAME FROM SESSION
+        return ""
+    elif request.method == 'POST':
+        return ""
+    else:
+        return redirect(url_for('/'))
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
