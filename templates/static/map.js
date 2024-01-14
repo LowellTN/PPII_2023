@@ -41,6 +41,7 @@ function placeMarkersFromCSVData(map, csvData) {
     var markers = L.markerClusterGroup();
     var visibleCentersList = document.getElementById('visible-centers-list');
     var currentBounds = map.getBounds();
+    visibleCentersList.innerHTML = '';
     csvData.forEach(center => {
         var x = parseFloat(center.LATITUDE);
         var y = parseFloat(center.LONGITUDE);
@@ -70,7 +71,7 @@ function placeMarkersFromCSVData(map, csvData) {
                 var listItem = document.createElement('div');
                 listItem.textContent = centerName;
                 listItem.addEventListener('click', function () {
-                map.setView([x, y], 15);
+                map.setView([x, y], 13);
                 });
                 visibleCentersList.appendChild(listItem);
             }
@@ -121,6 +122,9 @@ function initMap() {
         } else {
             alert('Veuillez entrer une adresse.');
         }
+    });
+    map.on('moveend', function () {
+        loadCentersFromCSV(map);
     });
     if (navigator.permissions && navigator.geolocation) {
         navigator.permissions.query({ name: 'geolocation'}).then(permissionStatus => {
