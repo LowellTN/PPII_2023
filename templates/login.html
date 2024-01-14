@@ -47,7 +47,7 @@
             box-sizing: border-box;
         }
 
-        button {
+        button:not(#returnButton) {
             background-color: #03AC13;
             color: #fff;
             padding: 10px 15px;
@@ -56,10 +56,20 @@
             cursor: pointer;
         }
 
-        button:hover {
+        button:hover:not(#returnButton) {
             background-color: #32612D;
         }
+
+        #returnButton {
+            position: fixed;
+            top: 2%;
+            left: 1%;
+            z-index: 1000;
+            font-size: 16px;
+            padding: 10px;
+        }
     </style>
+<button id="returnButton">Retour</button>
 <h1>Se connecter</h1>
  <form action="/login" method="post">
     <label for="login">Login</label>
@@ -69,6 +79,9 @@
     <input type="password" name="password" required><br>
     <button type="submit">S'authéntifier</button>
 </form>
+<script>document.getElementById('returnButton').addEventListener('click', function() {
+    window.location.href = '/';});
+</script>
 
 
 </body>
