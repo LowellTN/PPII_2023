@@ -37,6 +37,10 @@ function incrementClickCounter(popupId) {
     console.log(`Nombre de clics pour la popup ${popupId} : ${clickCounters[popupId]}`);
 }
 
+function leaveComment(centerName) {
+    window.location.href = '/1/comments'
+}
+
 function placeMarkersFromCSVData(map, csvData) {
     var markers = L.markerClusterGroup();
     var visibleCentersList = document.getElementById('visible-centers-list');
@@ -61,7 +65,7 @@ function placeMarkersFromCSVData(map, csvData) {
                 <strong>Ville :</strong> ${center.L_VILLE_SITE || 'non renseigné'}<br>
                 <button onclick="openGoogleMaps(${x}, ${y})">Itinéraire</button><br>
                 <button onclick="leaveComment('${center.N_SERVICE}')">Laisser un commentaire sur ce centre</button></div>
-            `; // Fonction leaveComment à définir (relier à l'espace de commentaires)
+            `;
             var marker = L.marker([x,y]).bindPopup(popupContent);
             marker.on('click', function () {
                 incrementClickCounter(center.N_SERVICE);
