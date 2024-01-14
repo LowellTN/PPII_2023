@@ -92,13 +92,16 @@ def login():
         password = request.form["password"]
         connection = get_db()
         cursor = connection.cursor()
-        cursor.execute("select id, login, password from users where login = ?", (login,))
+        cursor.execute("select id, login, password, visits from users where login = ?", (login,))
         client = cursor.fetchone()
         if client is None:
             return "Login ou mot de passe incorrect"
         if client[2] == password:
             session['client_id'] = client[0]
             session['login'] = client[1]
+            new_visits = client[3] + 1
+            cursor.execute("update users set visits = ? where id = ?", (new_visits, client[0]))
+            connection.commit()
             return redirect(url_for('profile'))
         else:
             return 'Login ou mot de passe incorrect'
@@ -112,10 +115,10 @@ def profile():
         client_info = user_info(client_id)
         comments = get_comments(client_id)
         favorites = favorite(client_id)
-        print(f"{comments}")
+        # print(f"{comments}")
         # fav_d = favorite(client_id)
-        client_id, first_name, last_name, email, login, password = client_info
-        return render_template('profile.html', client_id=client_id, first_name = first_name, last_name = last_name, email = email, login = login, comments = comments, favorites = favorites) 
+        client_id, first_name, last_name, email, login, password, visits = client_info
+        return render_template('profile.html', client_id=client_id, first_name = first_name, last_name = last_name, email = email, login = login, comments = comments, favorites = favorites, visits = visits) 
     else:
         return 'User not logged in'
 
