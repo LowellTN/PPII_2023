@@ -19,6 +19,12 @@ def map() :
 	return render_template("map.html")
 
 
+@app.route("/dons")
+def dons():
+	return render_template("dons.html")
+
+
+
 # Partie tri
 # les éléments de la liste à trier sont des tuples (id, distance, - pertinence)
 # les éléments sont triés du plus proche au plus loin ou du plus pertinent au moins pertinent
@@ -50,3 +56,10 @@ def tri(liste) :
 		else :
 			eq.append(e)
 	return tri(inf) + eq + tri(sup)
+<<<<<<< HEAD
+=======
+
+
+if __name__ == '__main__':
+	app.run(debug=True)
+>>>>>>> origin/main
