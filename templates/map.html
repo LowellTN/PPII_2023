@@ -11,10 +11,13 @@
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 </head>
 <body>
+    <button id="returnButton">Retour</button>
     <div id="map"></div></div>
     <div id="sidebar">
         <div id="visible-centers-list"></div>
       </div>
     <script src="static/map.js"></script>
+    <script>document.getElementById('returnButton').addEventListener('click', function() {
+        window.location.href = '/';});</script>
 </body>
 </html>

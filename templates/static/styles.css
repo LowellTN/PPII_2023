@@ -76,3 +76,11 @@ h1 {
     opacity: 1;
 }
 
+#returnButton {
+    position: fixed;
+    top: 2%;
+    left: 3%;
+    z-index: 1000;
+    font-size: 16px;
+    padding: 10px;
+}

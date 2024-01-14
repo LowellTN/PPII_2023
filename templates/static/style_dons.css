@@ -38,3 +38,12 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+#returnButton {
+    position: fixed;
+    top: 2%;
+    left: 0.8%;
+    z-index: 1000;
+    font-size: 16px;
+    padding: 10px;
+}
