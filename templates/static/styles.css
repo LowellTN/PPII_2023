@@ -21,6 +21,7 @@ h1 {
     background-color: rgba(51, 51, 51, 0.8);
     padding-top: 20px;
     z-index: 999;
+    overflow-y: auto;
 }
 
 #visible-centers-list div {
@@ -83,4 +84,22 @@ h1 {
     z-index: 1000;
     font-size: 16px;
     padding: 10px;
+}
+
+#search-container {
+    position: fixed;
+    top: 2%;
+    right: 14%;
+    z-index: 1000;
+    display: flex;
+}
+
+#addressInput {
+    padding: 8px;
+    margin-right: 5px;
+}
+
+#searchButton {
+    padding: 8px;
+    cursor: pointer;
 }

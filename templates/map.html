@@ -12,12 +12,17 @@
 </head>
 <body>
     <button id="returnButton">Retour</button>
+    <div id="search-container">
+        <input type="text" id="addressInput" placeholder="Entrez une adresse">
+        <button id="searchButton">Rechercher</button>
+    </div>
     <div id="map"></div></div>
     <div id="sidebar">
         <div id="visible-centers-list"></div>
       </div>
     <script src="static/map.js"></script>
     <script>document.getElementById('returnButton').addEventListener('click', function() {
-        window.location.href = '/';});</script>
+        window.location.href = '/';});
+    </script>
 </body>
 </html>

@@ -41,6 +41,7 @@ function placeMarkersFromCSVData(map, csvData) {
     var markers = L.markerClusterGroup();
     var visibleCentersList = document.getElementById('visible-centers-list');
     var currentBounds = map.getBounds();
+    visibleCentersList.innerHTML = '';
     csvData.forEach(center => {
         var x = parseFloat(center.LATITUDE);
         var y = parseFloat(center.LONGITUDE);
@@ -70,7 +71,7 @@ function placeMarkersFromCSVData(map, csvData) {
                 var listItem = document.createElement('div');
                 listItem.textContent = centerName;
                 listItem.addEventListener('click', function () {
-                map.setView([x, y], 15);
+                map.setView([x, y], 13);
                 });
                 visibleCentersList.appendChild(listItem);
             }
@@ -100,6 +101,31 @@ function initMap() {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
     map.attributionControl.setPosition('bottomleft');
+    function geocodeAddress(address) {
+        var nominatimApiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+        fetch(nominatimApiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    var location = data[0];
+                    map.setView([location.lat, location.lon], 13);
+                } else {
+                    alert('Adresse non trouvée.');
+                }
+            })
+            .catch(error => console.error('Erreur lors du géocodage de l\'adresse:', error));
+    }
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var addressInput = document.getElementById('addressInput').value;
+        if (addressInput) {
+            geocodeAddress(addressInput);
+        } else {
+            alert('Veuillez entrer une adresse.');
+        }
+    });
+    map.on('moveend', function () {
+        loadCentersFromCSV(map);
+    });
     if (navigator.permissions && navigator.geolocation) {
         navigator.permissions.query({ name: 'geolocation'}).then(permissionStatus => {
             if (permissionStatus.state === 'granted') {
