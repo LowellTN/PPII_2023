@@ -1,14 +1,35 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url(./images/blue-landscape.jpg);
+    background-size: cover;
 }
 
 header {
-    background-color: #333;
-    color: white;
+    background-color: #fcedd2e0;
+    color: #7c4c24;
+    display: flex;
     text-align: center;
+    font-size: 18.2px;
+    justify-content: center;
     padding: 1em;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.logo {
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    top: 1.1%;
+    left : 2.2%;
 }
 
 main {
@@ -17,7 +38,7 @@ main {
 }
 
 #donation-form {
-    background-color: #f5f5f5;
+    background-color: #fcedd2e0;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -41,9 +62,18 @@ main {
 
 #returnButton {
     position: fixed;
-    top: 2%;
+    top: 3%;
     left: 0.8%;
     z-index: 1000;
     font-size: 16px;
     padding: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1em;
+    color: #fff;
+    background: #5c3200;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

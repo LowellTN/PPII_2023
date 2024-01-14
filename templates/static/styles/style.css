@@ -30,20 +30,28 @@ body {
 
 .navbar a:not(.btn-signup, .btn-login) {
     color: #7c4c24;
-    font-size: 2em;
+    font-size: 45px;
     text-decoration: none;
+    vertical-align: middle;
     margin-left: 30px;
     font-weight: 700;
     font-family: 'Bebas Neue', sans-serif;
 }
+
+.navbar a:hover:not(.btn-signup, .btn-login) {
+    color: #149c3c;
+}
+
 .navbar .navlinks ul{
     align-items: center;
 }
+
 .navbar .navlinks ul li{
     display: inline-block;
     list-style: none;
     margin: 0 25px;
 }
+
 .navbar .navlinks ul li.active a{
     color: #149c3c;
     font-weight: 600;
@@ -85,9 +93,18 @@ body {
     border: 2px solid grey;
 }
 
+.title {
+    font-size: 50px;
+    line-height: 80px;
+}
 
+.text {
+    font-size: 25px;
+    line-height: 40px;
+    word-spacing: 5px;
+}
 
-@media screen and (max-width:900px){
+@media screen and (max-width:1250px){
     .navbar{
         padding: 10;
     }
@@ -96,7 +113,7 @@ body {
         top: 0;
         left: 0;
         position: absolute;
-        background-color: rgba(255, 255, 255, 0.205);
+        background-color: #fcedd2b0;
         backdrop-filter: blur(5px);
         width: 100%;
         height: 100vh;
@@ -108,15 +125,15 @@ body {
     }
 
     .navbar a{
-        color: #ccffbf;
+        color: #7c4c24;
         font-size: 3em;
         text-decoration: none;
         margin-left: 30px;
         font-weight: 700;
     }
+
     .navbar a:hover{
         color: #149c3c;
-        font-size: 3.5em;
         text-decoration: none;
         margin-left: 30px;
         font-weight: 700;
@@ -139,28 +156,45 @@ body {
 
 
 
-.banniere{
+.accueil{
     position: relative;
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../images/landscape.jpg);
+    background-image: url(../images/warm-landscape.jpg);
     background-size: cover;
 }
 
-.banniere .contenu{
+.info{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../images/warm-landscape.jpg);
+    background-size: cover;
+}
+
+.contenu {
+    background-color: #fcedd2e0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 70%;
     text-align: center;
 }
-.banniere .contenu h2{
-    color: #fff;
+
+.contenu h2{
+    color: #7c4c24;
     font-size: 3em;
     text-transform: capitalize;
 }
+
 .contenu p:nth-child(2){
-    color: #fff;
+    color: #7c4c24;
     font-size: 1.2em;
 }
 
@@ -176,6 +210,22 @@ body {
     letter-spacing: 2px;
     transition: 0.5s;
     margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn1:active {
+    font-size: 1em;
+    background: #fff;
+    color: #5c3200;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .btn2{
@@ -190,4 +240,20 @@ body {
     letter-spacing: 2px;
     transition: 0.5s;
     margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn2:active {
+    font-size: 1em;
+    background: #fff;
+    color: #2a4963;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

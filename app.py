@@ -83,6 +83,30 @@ def register():
 def registration_success():
     return "Inscription réussie"
 
+def user_info(user_id):
+    connection = get_db()
+    cursor = connection.cursor()
+    cursor.execute("select * from users where id = ?", (user_id,))
+    user_info = cursor.fetchone()
+    # connection.close()
+    return user_info
+
+def get_comments(user_id):
+    connection = get_db()
+    cursor = connection.cursor()
+    cursor.execute("select comment from comments where id_client = ?", (user_id,))
+    comments = cursor.fetchall()
+    # connection.close()
+    # print(f"{comments}")
+    return comments
+
+def favorite(user_id):
+    connection = get_db()
+    cursor = connection.cursor()
+    cursor.execute("select name from centers join fav on fav.id_center = centers.id where id_client = ?", (user_id,))
+    favorites = cursor.fetchall()
+    return favorites
+
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -107,9 +131,15 @@ def profile():
     client_id = session.get('client_id')
     login = session.get('login')
     if client_id is not None and login is not None:
-        return f'User ID: {client_id}, login: {login} '
+        client_info = user_info(client_id)
+        comments = get_comments(client_id)
+        favorites = favorite(client_id)
+        print(f"{comments}")
+        # fav_d = favorite(client_id)
+        client_id, first_name, last_name, email, login, password = client_info 
+        return render_template('profile.html', client_id=client_id, first_name=first_name, last_name=last_name, email=email, login=login, comments=comments, favorites=favorites)
     else:
-        return 'User not logged in'
+        return 'User not logged in' 
 
 
 

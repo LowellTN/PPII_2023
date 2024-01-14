@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="static/profile.css">
+</head>
+<body>
+    <h1>Profil de l'utilisateur</h1>
+    <div class = "container">
+        <section class="profile">
+     <img src="static/images/avatar.jpg" alt="" class="avatar">
+      </div>
+    <div class = "user-details">
+        <table>
+        <tr>
+        </tr>    
+        <td><strong>Login</strong>: {{login}}</td>
+        <td><strong>Prenom</strong>: {{first_name}}</td>
+        <tr>
+        </tr>
+        <td><strong>Nom</strong>: {{last_name}}</td>
+        <td><strong>Email</strong>: {{email}}</td>
+            </div>
+        </table>
+
+    <h2>Commentaires</h2>
+    <ul>
+    {% for comment in comments %}
+    <li>{{comment[0]}}</li>
+    {% endfor %}
+    </ul>
+
+    <h2>Favoris</h2>
+    <ul>
+    {% for favori in favorites %}
+    <li>{{favori[0]}}</li>
+    {% endfor %}
+    </ul>
+    <a href="/" class="return-home-btn">Retour</a>
+</body>
+</html>
