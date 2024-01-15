@@ -149,7 +149,7 @@ def profile():
 
 
 liste = []
-filtre = ""
+filtre = "distance"
 if filtre == "distance" :
 	index = 1
 elif filtre == "pertinence" :
