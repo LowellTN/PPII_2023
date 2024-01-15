@@ -23,14 +23,19 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     justify-content: center;
     align-items: center;
-    width: 100px;
+    width: 80px;
     height: 100%;
+}
+
+.nom-prenom {
+    text-align: center;
+    align-items: center;
 }
 
 .profile {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .avatar {
@@ -41,6 +46,7 @@ header {
 
 .user-details {
     flex-grow: 1;
+    margin-top: 20px;
 }
 
 .username,
@@ -51,6 +57,10 @@ header {
 
 .comments {
     text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
 }
 
 

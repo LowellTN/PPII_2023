@@ -1,6 +1,7 @@
 from flask import Flask, render_template, g, request, url_for, redirect, session
 from pathlib import Path,os
 import sqlite3
+import datetime
 
 TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./templates/static')
@@ -10,6 +11,10 @@ DATABASE = 'data/info.db'
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.secret_key = '23343243'
+comments_list = [
+    ["User1", "2022-01-14", "110", "This is a comment about the waste sorting center."],
+    ["User2", "2022-01-15", "010", "Another user's comment about the waste sorting center."],
+]
 
 def get_db():
 	db = getattr(g, '_database', None)
@@ -39,28 +44,40 @@ def dons():
 
 @app.route("/<int:center_id>/comments")
 def comments(center_id):
-    """
     conn = get_db()
     c = conn.cursor()
-    c.execute("SELECT u.username, c.date, c.type, c.content FROM comments as c, users as u WHERE c.center_id = (?) AND c.user_id = u.user_id;", (center_id,)) 
-    res = c.fetchall()
+    c.execute("SELECT u.last_name, u.first_name, c.date, c.waste_type, c.comment FROM comments as c, users as u WHERE c.id = (?) AND c.id_client = u.id;", (center_id,)) 
+    comments_list = c.fetchall()
     c.execute("SELECT name FROM centers WHERE id = (?)", (center_id,))
     center_name = c.fetchone()
-	"""
-    center_name = None
-    res = None
-    return render_template("display_comments.html", comments = res, center_name = center_name)
+    return render_template("comments.html", comments = comments_list, center_name = center_name)
 
-@app.route("/<int:center_id>/make_comment", methods = ["GET", "POST"])
-def make_comment(center_id):
-    if request.method == 'GET':
-        #TODO - LOGGED IN CHECK
-        #TODO - GET USERNAME FROM SESSION
-        return ""
-    elif request.method == 'POST':
-        return ""
-    else:
-        return redirect(url_for('/'))
+@app.route("/<int:center_id>/add_comment", methods = ["POST"])
+def add_comment(center_id):
+    #TODO - LOGGED IN CHECK
+    #TODO - GET USERNAME FROM SESSION
+    user_id = None
+    code = ''.join(request.form.getlist('wasteType'))
+    waste_types = get_waste_types(code)
+    comment_text = request.form['commentText']
+    if not waste_types:
+          return "Merci de sélectionner au moins un type de déchets", 400
+    date = get_current_date()
+    conn = get_db()
+    c = conn.cursor()
+    c.execute("INSERT INTO comments (user_id, type, content, date) VALUES (?,?,?,?);", (user_id, waste_types, comment_text, date))
+    #TODO ADD SUR LE USER
+    return redirect(url_for("/{center_id}/comments".format(center_id = center_id)))
+
+def get_current_date():
+    now = datetime.datetime.now()
+    return now.strftime("%Y-%m-%d")
+
+def get_waste_types(code):
+    types = ["Ordures ménagères résiduelles", "Emballages recyclables", "Verre", "Encombrants", "Déchets verts", "Déchets d'Equipement Electriques et Electroniques (DEEE)", "Déchets dangereux ou non issus des activités de ménage (produits d'entretien), bricolage, jardinage des particuliers"]
+    res = [types[i] for i in range(len(code)) if code[i]]
+    return ", ".join(res) + '.'
+      
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
@@ -114,13 +131,16 @@ def login():
         password = request.form["password"]
         connection = get_db()
         cursor = connection.cursor()
-        cursor.execute("select id, login, password from users where login = ?", (login,))
+        cursor.execute("select id, login, password, visits from users where login = ?", (login,))
         client = cursor.fetchone()
         if client is None:
             return "Login ou mot de passe incorrect"
         if client[2] == password:
             session['client_id'] = client[0]
             session['login'] = client[1]
+            new_visits = client[3] + 1
+            cursor.execute("update users set visits = ? where id = ?", (new_visits, client[0]))
+            connection.commit()
             return redirect(url_for('profile'))
         else:
             return 'Login ou mot de passe incorrect'
@@ -134,10 +154,10 @@ def profile():
         client_info = user_info(client_id)
         comments = get_comments(client_id)
         favorites = favorite(client_id)
-        print(f"{comments}")
+        # print(f"{comments}")
         # fav_d = favorite(client_id)
-        client_id, first_name, last_name, email, login, password = client_info 
-        return render_template('profile.html', client_id=client_id, first_name=first_name, last_name=last_name, email=email, login=login, comments=comments, favorites=favorites)
+        client_id, first_name, last_name, email, login, password, visits = client_info 
+        return render_template('profile.html', client_id=client_id, first_name=first_name, last_name=last_name, email=email, login=login, comments=comments, favorites=favorites, visits=visits)
     else:
         return 'User not logged in' 
 

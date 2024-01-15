@@ -4,10 +4,12 @@ body {
 }
 
 .comment {
+    background-color: #f9f9f9;
     border: 1px solid #ddd;
-    border-radius: 10px; /* Add rounded edges */
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .comment-banner {
