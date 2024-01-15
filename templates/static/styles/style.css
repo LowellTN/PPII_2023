@@ -10,13 +10,15 @@ body {
     background-color: #ccffbf;
 }
 
+
+
 .logo{
     display: flex;
     justify-content: center;
 }
 
 .navbar{
-    position: absolute;
+    position: fixed;
     padding: 10px;
     width: 100%;
     z-index: 1;
@@ -27,6 +29,7 @@ body {
     box-sizing: border-box;
     background-color: #fcedd2e0;
 }
+
 
 .navbar a:not(.btn-signup, .btn-login) {
     color: #7c4c24;
@@ -62,6 +65,7 @@ body {
     right: 10px;
     display: none;
 }
+
 
 .auth-buttons {
     display: flex;
@@ -178,6 +182,7 @@ body {
     background-size: cover;
 }
 
+
 .contenu {
     background-color: #fcedd2e0;
     padding: 20px;
@@ -186,7 +191,6 @@ body {
     max-width: 70%;
     text-align: center;
 }
-
 .contenu h2{
     color: #7c4c24;
     font-size: 3em;
