@@ -1,11 +1,11 @@
-function loadCentersFromCSV(map) {
+function loadCentersFromCSV(map, userLat, userLon) {
     var csvFilePath = 'static/out.csv';
     fetch(csvFilePath)
         .then(response => response.text())
         .then(csvData => Papa.parse(csvData, { header: true }))
         .then(data => {
             var filteredData = filterMostRecentEntries(data.data);
-            placeMarkersFromCSVData(map, filteredData);
+            placeMarkersFromCSVData(map, filteredData, userLat, userLon);
         })
         .catch(error => console.error('Erreur lors de la récupération des données CSV:', error));
 }
@@ -37,11 +37,34 @@ function incrementClickCounter(popupId) {
     console.log(`Nombre de clics pour la popup ${popupId} : ${clickCounters[popupId]}`);
 }
 
-function placeMarkersFromCSVData(map, csvData) {
+function leaveComment(centerName) {
+    window.location.href = '/1/comments'
+}
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var distance = R * c;
+    return distance;
+}
+
+
+function placeMarkersFromCSVData(map, csvData, userLat, userLon) {
     var markers = L.markerClusterGroup();
     var visibleCentersList = document.getElementById('visible-centers-list');
     var currentBounds = map.getBounds();
     visibleCentersList.innerHTML = '';
+    var centersToShow = 0;
+    csvData.sort(function (a, b) {
+        var distanceA = calculateDistance(userLat, userLon, parseFloat(a.LATITUDE), parseFloat(a.LONGITUDE));
+        var distanceB = calculateDistance(userLat, userLon, parseFloat(b.LATITUDE), parseFloat(b.LONGITUDE));
+        return distanceA - distanceB;
+    });
     csvData.forEach(center => {
         var x = parseFloat(center.LATITUDE);
         var y = parseFloat(center.LONGITUDE);
@@ -60,20 +83,25 @@ function placeMarkersFromCSVData(map, csvData) {
                 <strong>Ville :</strong> ${center.L_VILLE_SITE || 'non renseigné'}<br>
                 <button onclick="openGoogleMaps(${x}, ${y})">Itinéraire</button><br>
                 <button onclick="leaveComment('${center.N_SERVICE}')">Laisser un commentaire sur ce centre</button></div>
-            `; // Fonction leaveComment à définir (relier à l'espace de commentaires)
+            `;
             var marker = L.marker([x,y]).bindPopup(popupContent);
             marker.on('click', function () {
                 incrementClickCounter(center.N_SERVICE);
             });
             markers.addLayer(marker);
             if (currentBounds.contains([x,y])) {
-                var centerName = center.N_SERVICE || 'Non renseigné';
-                var listItem = document.createElement('div');
-                listItem.textContent = centerName;
-                listItem.addEventListener('click', function () {
-                map.setView([x, y], 13);
-                });
-                visibleCentersList.appendChild(listItem);
+                if (centersToShow < 20) {
+                    var centerName = center.N_SERVICE || 'Non renseigné';
+                    var listItem = document.createElement('div');
+                    listItem.textContent = centerName;
+                    listItem.addEventListener('click', function () {
+                    map.setView([x, y], 13);
+                    });
+                    visibleCentersList.appendChild(listItem);
+                    centersToShow++;
+                } else {
+                    visibleCentersList.innerHTML = '';
+                }
             }
         } 
     });
@@ -84,7 +112,7 @@ function openGoogleMaps(latitude, longitude) {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`);
 }
 
-function toggleFavorite(starElement) {
+function toggleFavorite() {
     var button = document.querySelector('.favorite-btn');
     var tooltip = document.querySelector('.tooltip');
     button.classList.toggle('clicked');
@@ -124,7 +152,8 @@ function initMap() {
         }
     });
     map.on('moveend', function () {
-        loadCentersFromCSV(map);
+        var userCoordinates = map.getCenter();
+        loadCentersFromCSV(map, userCoordinates.lat, userCoordinates.lng);
     });
     if (navigator.permissions && navigator.geolocation) {
         navigator.permissions.query({ name: 'geolocation'}).then(permissionStatus => {
@@ -133,11 +162,12 @@ function initMap() {
                     function (position) {
                         var userCoordinates = [position.coords.latitude, position.coords.longitude];
                         map.setView(userCoordinates,13);
-                        loadCentersFromCSV(map);
+                        loadCentersFromCSV(map, userCoordinates[0], userCoordinates[1]);
                     },
                     function (error) {
+                        var userCoordinates = [position.coords.latitude, position.coords.longitude];
                         console.error('Erreur lors de la récupération de la position de l\'utilisateur :', error.message);
-                        loadCentersFromCSV(map);
+                        loadCentersFromCSV(map, userCoordinates[0], userCoordinates[1]);
                     }
                 );
             } else if (permissionStatus.state === 'prompt') {
@@ -147,7 +177,7 @@ function initMap() {
                         function (position) {
                             var userCoordinates = [position.coords.latitude, position.coords.longitude];
                             map.setView(userCoordinates,13);
-                            loadCentersFromCSV(map);
+                            loadCentersFromCSV(map, userCoordinates[0], userCoordinates[1]);
                         },
                         function (error) {
                             console.error('Erreur lors de la récupération de la position de l\'utilisateur :', error.message);
@@ -155,16 +185,16 @@ function initMap() {
                     );
                 } else {
                     console.error('La géolocalisation n\'est pas autorisée par l\'utilisateur.');
-                    loadCentersFromCSV(map);
+                    //loadCentersFromCSV(map);
                 }
             } else {
                 console.error('La géolocalisation n\'est pas autorisée par l\'utilisateur.');
-                loadCentersFromCSV(map);
+                //loadCentersFromCSV(map);
             }
         });
     } else {
         console.error('La géolocalisation n\'est pas prise en charge par votre navigateur.');
-        loadCentersFromCSV(map);
+        //loadCentersFromCSV(map);
     }
 }
 

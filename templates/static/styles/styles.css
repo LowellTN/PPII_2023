@@ -19,9 +19,19 @@ h1 {
     top: 0;
     right: 0;
     background-color: #fcedd2b0;
-    padding-top: 20px;
+    padding-top: 0;
     z-index: 999;
     overflow-y: auto;
+}
+
+
+#sidebar-header {
+    text-align: center;
+    color: #522b0c;
+    font-size: 24px;
+    margin-bottom: 20px;
+    background-color: rgb(207, 182, 134);
+    border: 3px solid #7c4c24;
 }
 
 #visible-centers-list div {
@@ -49,13 +59,13 @@ h1 {
     background: none;
     border: none;
     cursor: pointer;
-    fill: white; /* Couleur de l'intérieur de l'étoile par défaut */
-    stroke: black; /* Couleur des bords de l'étoile par défaut */
-    stroke-width: 1.5; /* Épaisseur des bords de l'étoile par défaut */
+    fill: white;
+    stroke: black;
+    stroke-width: 1.5;
 }
 
 .favorite-btn.clicked {
-    fill: #ffcc00; /* Couleur de l'intérieur de l'étoile lorsqu'elle est cliquée */
+    fill: #ffcc00;
 }
 
 .tooltip {

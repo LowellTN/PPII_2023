@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{center_name}}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/comments.css') }}">
+</head>
+<body>
+    <h1>Commentaires du centre {{center_name}}</h1>
+
+    <div id="commentForm">
+        <h2>Ajouter un commentaire</h2>
+            <h3>Types de déchets acceptés par le centre</h3>
+            <form action="url_for('/' + '{{center_id}}' + '/add_comment')" method="post" id="addCommentForm">
+
+            <label>
+                <input type="checkbox" name="wasteType" value="1"> Ordures ménagères résiduelles
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="wasteType" value="2"> Emballages recyclables
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="wasteType" value="2"> Verre
+            </label>
+            <br>
+                <input type="checkbox" name="wasteType" value="2"> Encombrants 
+            </label>
+            <br>
+                <input type="checkbox" name="wasteType" value="2"> Déchets verts
+            </label>
+            <br>
+                <input type="checkbox" name="wasteType" value="2"> Déchets d'Equipement Electriques et Electroniques (DEEE) 
+            </label>
+            <br>
+                <input type="checkbox" name="wasteType" value="2"> Déchets dangereux ou non issus des activités de ménage (produits d'entretien), bricolage, jardinage des particuliers 
+            </label>
+            <br>
+            <br>
+            <label>
+                <h4>Informations que vous voulez partager avec les autres utilisateurs:</h4>
+                <textarea name="commentText" rows="4" cols="50"></textarea>
+            </label>
+
+            <input type="submit" value="Poster">
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="commentsContainer">
+        {% for comment in comments %}
+            <div class="comment">
+                <div class="comment-banner">
+                    <strong>{{ comment[0] }} {{ comment[1] }}</strong> - {{ comment[2] }}
+                </div>
+                <strong>Types de déchets:</strong> {{ comment[3] }}<br>
+                {{ comment[3] }}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

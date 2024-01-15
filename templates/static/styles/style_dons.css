@@ -21,7 +21,7 @@ header {
     font-size: 18.2px;
     justify-content: center;
     padding: 1em;
-    Font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .logo {
@@ -42,6 +42,10 @@ main {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #donation-form label,
@@ -58,6 +62,10 @@ main {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #returnButton {
@@ -67,7 +75,7 @@ main {
     z-index: 1000;
     font-size: 16px;
     padding: 10px;
-    Font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 1em;
     color: #fff;
     background: #5c3200;
