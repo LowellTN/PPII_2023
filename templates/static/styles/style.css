@@ -12,9 +12,12 @@ body {
 
 
 .logo{
+    position: relative;
     z-index: 3;
     display: flex;
     justify-content: center;
+    top: 1.8%;
+    left : 2.2%;
 }
 
 .navbar{

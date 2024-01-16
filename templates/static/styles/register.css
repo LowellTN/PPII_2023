@@ -13,7 +13,7 @@
     position:fixed;
     display: flex;
     justify-content: center;
-    top: 2.5%;
+    top: 1.5%;
     left : 2.2%;
 }
 
@@ -30,7 +30,7 @@
     transition: 0.5s;
     top: 0%;
     box-sizing: border-box;
-    background-color: #fcedd2e0;
+    background-color: #fcedd2;
 }
 
 body {
