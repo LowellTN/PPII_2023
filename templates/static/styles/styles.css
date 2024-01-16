@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    margin: 20px;
+}
+
+#map {
+    height: 100vh;
+}
+
+#sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fcedd2b0;
+    padding-top: 0;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+
+#sidebar-header {
+    text-align: center;
+    color: #522b0c;
+    font-size: 24px;
+    margin-bottom: 20px;
+    background-color: rgb(207, 182, 134);
+    border: 3px solid #7c4c24;
+}
+
+#visible-centers-list div {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #7c4c24;
+    transition: background-color 0.3s ease;
+}
+
+#visible-centers-list div:hover {
+    background-color: #dfd1b7de;
+}
+
+.custom-popup {
+    width: 1000px;
+}
+
+.favorite-container {
+    position: relative;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    fill: white;
+    stroke: black;
+    stroke-width: 1.5;
+}
+
+.favorite-btn.clicked {
+    fill: #ffcc00;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    bottom: 125%;
+    left: 10%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+.favorite-btn:hover + .tooltip {
+    opacity: 1;
+}
+
+#returnButton {
+    position: fixed;
+    top: 2%;
+    left: 3%;
+    z-index: 1000;
+    font-size: 16px;
+    padding: 10px;
+}
+
+#search-container {
+    position: fixed;
+    top: 2%;
+    right: 14%;
+    z-index: 1000;
+    display: flex;
+}
+
+#addressInput {
+    padding: 8px;
+    margin-right: 5px;
+}
+
+#searchButton {
+    padding: 8px;
+    cursor: pointer;
+}
