@@ -4,11 +4,40 @@ function loadCentersFromCSV(map, userLat, userLon) {
         .then(response => response.text())
         .then(csvData => Papa.parse(csvData, { header: true }))
         .then(data => {
+            // var centerNames = extractCentersNames(data.data); Décommenter ces lignes pour générer à nouveau les noms des centres dans la table centers de la base de données
+            // updateDatabaseWithCenters(centerNames);
             var filteredData = filterMostRecentEntries(data.data);
             placeMarkersFromCSVData(map, filteredData, userLat, userLon);
         })
         .catch(error => console.error('Erreur lors de la récupération des données CSV:', error));
 }
+
+/* Décommenter cette fonction pour générer à nouveau les noms des centres dans la table centers de la base de données
+function extractCentersNames(data) {
+    var centersNames = new Set();
+    data.forEach(entry => {
+        if (entry.N_SERVICE !== undefined) {
+            centersNames.add(entry.N_SERVICE.toUpperCase());
+        }
+    });
+    return Array.from(centersNames);
+}
+*/
+
+/* Décommenter cette fonction pour générer à nouveau les noms des centres dans la table centers de la base de données
+function updateDatabaseWithCenters(centersNames) {
+    fetch('/update_db', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ centersNames: centersNames })
+    })
+    .then(response => response.json())
+    .then(data => console.log('Database updated with centers:', data))
+    .catch(error => console.error('Error updating database with centers:', error));
+}
+*/
 
 function filterMostRecentEntries(data) {
     var latestEntries = {};

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g, request, url_for, redirect, session
+from flask import Flask, render_template, g, request, url_for, redirect, session, jsonify
 from pathlib import Path,os
 import sqlite3
 import datetime
@@ -89,7 +89,7 @@ def register():
         password = request.form["password"]
         connection = get_db()
         cursor = connection.cursor()
-        cursor.execute("insert into users (first_name, last_name, email, login, password) values (?,?,?,?,?)", (first_name, last_name, email, login, password))
+        cursor.execute("insert into users (first_name, last_name, email, login, password, visits) values (?,?,?,?,?,?)", (first_name, last_name, email, login, password, 0))
         connection.commit()
         connection.close()
         return redirect('/registration_success') 
@@ -159,9 +159,22 @@ def profile():
         client_id, first_name, last_name, email, login, password, visits = client_info 
         return render_template('profile.html', client_id=client_id, first_name=first_name, last_name=last_name, email=email, login=login, comments=comments, favorites=favorites, visits=visits)
     else:
-        return 'User not logged in' 
+        return 'User not logged in'
 
-
+''' Décommenter cette fonction pour générer à nouveau les noms des centres dans la table centers de la base de données
+@app.route('/update_db', methods=['POST'])
+def update_database_with_centers():
+    if request.method == 'POST':
+        centers_names = request.json.get('centersNames', [])
+        connection = get_db()
+        cursor = connection.cursor()
+        for name in centers_names:
+            cursor.execute('INSERT INTO centers (name, nb_fav, nb_click) VALUES (?, 0, 0);', (name,))
+        connection.commit()
+        connection.close()
+        return jsonify({'status': 'success'})
+    return jsonify({'status': 'error'})
+'''
 
 # Partie tri
 # les éléments de la liste à trier sont des tuples (id, distance, - pertinence)
