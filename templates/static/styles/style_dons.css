@@ -9,9 +9,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url(../images/blue-landscape.jpg);
-    background-size: cover;
+    background-image: url(../images/blue-landscape.png);
+    background-size:cover;
 }
+
 
 header {
     background-color: #fcedd2e0;
@@ -43,7 +44,7 @@ main {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: absolute;
-    top: 50%;
+    top: 300px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
