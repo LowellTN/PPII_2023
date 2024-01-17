@@ -10,13 +10,7 @@ body {
     background-color: #ccffbf;
 }
 
-
-<<<<<<< HEAD
-
 .logo {
-=======
-.logo{
->>>>>>> origin
     position: relative;
     z-index: 3;
     display: flex;
@@ -85,11 +79,7 @@ body {
     }
 
     .navlinks{
-<<<<<<< HEAD
-        top: 80px;
-=======
         top:80px;
->>>>>>> origin
         z-index: 1;
         left: 0;
         position: absolute;
@@ -131,10 +121,6 @@ body {
         margin-left: 30px;
         font-weight: 700;
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> origin
 
     .navbar .btn:hover{
         color: #149c3c;
@@ -152,10 +138,6 @@ body {
         font-size: 3.5em;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin
     .navbar .btn4:hover{
         color: #7c4c24;
         text-decoration: none;
@@ -349,8 +331,6 @@ body {
     transition: 0.5s;
     margin-left: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
-=======
 }
 
 .btn-signup,
@@ -376,5 +356,4 @@ body {
     background: #fff;
     color: black;
     border: 2px solid grey;
->>>>>>> origin
 }

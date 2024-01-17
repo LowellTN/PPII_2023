@@ -8,13 +8,10 @@
     letter-spacing: .1rem;
 }
 
-<<<<<<< HEAD
 a {
     color: white;
 }
 
-=======
->>>>>>> origin
 .logo {
     z-index: 2;
     position:fixed;
@@ -24,10 +21,6 @@ a {
     left : 2.2%;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
 .navbar{
     color: #7c4c24;
     z-index: 1;
@@ -44,10 +37,6 @@ a {
     background-color: #fcedd2;
 }
 
-<<<<<<< HEAD
-=======
-
-
 
 h1{
     font-size: 35px;
@@ -56,7 +45,6 @@ h1{
     margin-right: auto;
 }
 
->>>>>>> origin
 body {
     position: relative;
     top: 10%;
@@ -70,8 +58,6 @@ body {
     background-image: url(../images/landscape-mount.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-<<<<<<< HEAD
-=======
 }
 
 
@@ -86,7 +72,6 @@ body {
 img {
     border-radius: 15px;
     width: 240px;
->>>>>>> origin
 }
 
 header {
@@ -142,14 +127,8 @@ header {
     text-align: center;
 }
 
-<<<<<<< HEAD
-h1 {
-    font-size: 35px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-=======
-td{
+
+td {
     color: white;
 }
 
@@ -159,7 +138,6 @@ h2 {
     background-color: #fcedd2e0;
     border-radius: 15px;
     box-shadow: 0px 5px 5px rgb(100, 100, 100);
->>>>>>> origin
 }
 
 
@@ -172,26 +150,6 @@ background-color: #4BA38C;
             cursor: pointer;
             text-decoration: none;
             margin-top: 20px;
-}
-
-.info{
-    margin-top: 100px;
-    color: #fff;
-    text-align: center;
-    align-items: center;
-}
-
-img {
-    border-radius: 15px;
-    width: 240px;
-}
-
-h2 {
-    color: #7c4c24;
-    background-size: 120%;
-    background-color: #fcedd2e0;
-    border-radius: 15px;
-    box-shadow: 0px 5px 5px rgb(100, 100, 100);
 }
 
 
