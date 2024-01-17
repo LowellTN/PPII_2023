@@ -37,12 +37,31 @@
     <h2>Favoris</h2>
     <ul>
     {% for favori in favorites %}
-    <li>{{favori[0]}}</li>
+    <li><a href="#" onclick="goToFavoriteCenter('{{ favori[0] }}')">{{ favori[0] }}</a></li>
     {% endfor %}
     </ul>
     <h2>Visites sur le site</h2>
     <p>{{visits}}</p>
     <br>
     <a href="/" class="return-home-btn">Retour</a>
+    <script>
+        function goToFavoriteCenter(centerName) {
+            const normalizedCenterName = centerName.toUpperCase();
+            fetch(`/get_center_coordinates/${normalizedCenterName}`)
+                .then(response => response.json())
+                .then(data => {
+                    const latitude = data.latitude;
+                    const longitude = data.longitude;
+                    console.log(latitude);
+                    console.log(longitude);
+                    if (latitude && longitude) {
+                        window.location.href = `/map?center=${latitude},${longitude}`;
+                    } else {
+                        console.error('Coordonnées du centre non trouvées');
+                    }
+                })
+                .catch(error => console.error('Erreur lors de la récupération des coordonnées du centre:', error));
+        }   
+    </script>
 </body>
 </html>

@@ -4,34 +4,29 @@ function loadCentersFromCSV(map, userLat, userLon) {
         .then(response => response.text())
         .then(csvData => Papa.parse(csvData, { header: true }))
         .then(data => {
-            // var centerNames = extractCentersNames(data.data); Décommenter ces lignes pour générer à nouveau les noms des centres dans la table centers de la base de données
-            // updateDatabaseWithCenters(centerNames);
             var filteredData = filterMostRecentEntries(data.data);
             placeMarkersFromCSVData(map, filteredData, userLat, userLon);
+            // var centerNames = extractCenterNames(filteredData);      Lignes à décommenter pour générer à nouveau les noms des centres dans la base de données
+            // updateDbWithFilteredCenters(centerNames);
         })
         .catch(error => console.error('Erreur lors de la récupération des données CSV:', error));
 }
 
-/* Décommenter cette fonction pour générer à nouveau les noms des centres dans la table centers de la base de données
-function extractCentersNames(data) {
-    var centersNames = new Set();
-    data.forEach(entry => {
-        if (entry.N_SERVICE !== undefined) {
-            centersNames.add(entry.N_SERVICE.toUpperCase());
-        }
-    });
-    return Array.from(centersNames);
+/*
+function extractCenterNames(data) {
+    var centerNames = data.map(entry => entry.N_SERVICE.toUpperCase());         Idem
+    return Array.from(new Set(centerNames));
 }
 */
 
-/* Décommenter cette fonction pour générer à nouveau les noms des centres dans la table centers de la base de données
-function updateDatabaseWithCenters(centersNames) {
+/*
+function updateDbWithFilteredCenters(centerNames) {
     fetch('/update_db', {
         method: 'POST',
-        headers: {
+        headers: {                                                 Idem
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ centersNames: centersNames })
+        body: JSON.stringify({ centerNames: centerNames })
     })
     .then(response => response.json())
     .then(data => console.log('Database updated with centers:', data))
@@ -63,12 +58,28 @@ function incrementClickCounter(popupId) {
     } else {
         clickCounters[popupId]++;
     }
-    console.log(`Nombre de clics pour la popup ${popupId} : ${clickCounters[popupId]}`);
+    fetch(`/update_click_count/${popupId}`, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => console.log('Nb_click updated for center:', data))
+        .catch(error => console.error('Error updating nb_click for center:', error));
 }
 
 function leaveComment(centerName) {
-    window.location.href = '/1/comments'
+    const normalizedCenterName = centerName.toUpperCase();
+    fetch(`/get_center_id/${normalizedCenterName}`)
+        .then(response => response.json())
+        .then(data => {
+            const centerId = data.centerId;
+            console.log(centerId);
+            if (centerId) {
+                window.location.href = `/${centerId}/comments`;
+            } else {
+                console.error('ID du centre non trouvé');
+            }
+        })
+        .catch(error => console.error('Erreur lors de la récupération de l\'ID du centre:', error));
 }
+
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
     var R = 6371;
@@ -101,7 +112,7 @@ function placeMarkersFromCSVData(map, csvData, userLat, userLon) {
             var popupContent = `
                 <div class="custom-popup">
                 <div class="favorite-container">
-                <button class="favorite-btn" onclick="toggleFavorite()">
+                <button class="favorite-btn" onclick="toggleFavorite('${center.N_SERVICE}')">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg></button>
                 <div class="tooltip">Ajouter aux favoris</div></div>
@@ -141,12 +152,16 @@ function openGoogleMaps(latitude, longitude) {
     window.open(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`);
 }
 
-function toggleFavorite() {
+function toggleFavorite(centerName) {
     var button = document.querySelector('.favorite-btn');
     var tooltip = document.querySelector('.tooltip');
     button.classList.toggle('clicked');
     if (button.classList.contains('clicked')) {
         tooltip.textContent = 'Retirer des favoris';
+        fetch(`/add_to_favorites/${centerName}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => console.log('Centre ajouté aux favoris:', data))
+            .catch(error => console.error('Erreur lors de l\'ajout aux favoris:', error));
     } else {
         tooltip.textContent = 'Ajouter aux favoris';
     }
@@ -180,9 +195,19 @@ function initMap() {
             alert('Veuillez entrer une adresse.');
         }
     });
+    function shouldCenterOnUserLocation(urlParams) {
+        return urlParams.has('center');
+    }
     map.on('moveend', function () {
-        var userCoordinates = map.getCenter();
-        loadCentersFromCSV(map, userCoordinates.lat, userCoordinates.lng);
+        const urlParams = new URLSearchParams(window.location.search);
+        if (!shouldCenterOnUserLocation(urlParams)) {
+            var userCoordinates = map.getCenter();
+            loadCentersFromCSV(map, userCoordinates.lat, userCoordinates.lng);
+        } else {
+            const centerParam = urlParams.get('center');
+            const [centerLatitude, centerLongitude] = centerParam.split(',').map(parseFloat);
+            map.setView([centerLatitude, centerLongitude], 13);
+        }
     });
     if (navigator.permissions && navigator.geolocation) {
         navigator.permissions.query({ name: 'geolocation'}).then(permissionStatus => {
