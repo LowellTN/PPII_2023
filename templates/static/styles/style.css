@@ -10,6 +10,8 @@ body {
     background-color: #ccffbf;
 }
 
+
+
 .logo {
     position: relative;
     z-index: 3;
@@ -32,6 +34,20 @@ body {
     background-color: #fcedd2;
 }
 
+
+.navbar a:not(.btn-signup, .btn-login) {
+    color: #7c4c24;
+    font-size: 45px;
+    text-decoration: none;
+    vertical-align: middle;
+    margin-left: 30px;
+    font-weight: 700;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.navbar a:hover:not(.btn-signup, .btn-login) {
+    color: #149c3c;
+}
 
 .navbar .navlinks ul{
     align-items: center;
@@ -60,6 +76,30 @@ body {
     align-items: center;
 }
 
+.btn-signup,
+.btn-login {
+    font-size: 0.8em;
+    color: #fff;
+    padding: 8px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+
+.btn-signup {
+    background: #4caf50;
+}
+
+.btn-login {
+    background: #fff;
+    color: black;
+    border: 2px solid grey;
+}
 
 .title {
     font-size: 50px;
@@ -72,14 +112,14 @@ body {
     word-spacing: 5px;
 }
 
-@media screen{
+@media screen and (max-width:1250px){
     .navbar{
         padding: 10;
         z-index: 2;
     }
 
     .navlinks{
-        top:80px;
+        top: 80px;
         z-index: 1;
         left: 0;
         position: absolute;
@@ -156,7 +196,6 @@ body {
         flex-direction: column;
     }
 
-
     .navbar .btn-menu{
         z-index: 3;
         display: block;
@@ -173,7 +212,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url(../images/landscape.jpg);
+    background-image: url(../images/warm-landscape.jpg);
     background-size: cover;
 }
 
@@ -237,7 +276,6 @@ body {
     transition: 0.5s;
     margin-left: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
 }
 
 .btn2{
@@ -331,29 +369,4 @@ body {
     transition: 0.5s;
     margin-left: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn-signup,
-.btn-login {
-    font-size: 0.8em;
-    color: #fff;
-    padding: 8px 15px;
-    margin-left: 10px;
-    text-decoration: none;
-    letter-spacing: 2px;
-    transition: 0.5s;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-family: sans-serif;
-}
-
-.btn-signup {
-    background: #4caf50;
-}
-
-.btn-login {
-    background: #fff;
-    color: black;
-    border: 2px solid grey;
 }

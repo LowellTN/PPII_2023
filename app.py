@@ -12,6 +12,10 @@ DATABASE = 'data/info.db'
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.secret_key = '23343243'
+comments_list = [
+    ["User1", "2022-01-14", "110", "This is a comment about the waste sorting center."],
+    ["User2", "2022-01-15", "010", "Another user's comment about the waste sorting center."],
+]
 
 def get_db():
 	db = getattr(g, '_database', None)
@@ -75,6 +79,8 @@ def add_comment(center_id):
 def get_current_date():
     now = datetime.datetime.now()
     return now.strftime("%Y-%m-%d")
+
+      
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
