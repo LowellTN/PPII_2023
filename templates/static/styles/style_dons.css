@@ -14,11 +14,11 @@ body {
 }
 
 header {
-    background-color: #fcedd2e0;
+    background-color: #fcedd2;
     color: #7c4c24;
     display: flex;
     text-align: center;
-    font-size: 18.2px;
+    font-size: 20       px;
     justify-content: center;
     padding: 1em;
     font-family: 'Bebas Neue', sans-serif;

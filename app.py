@@ -111,10 +111,10 @@ def user_info(user_id):
     # connection.close()
     return user_info
 
-def get_comments(user_id):
+def get_comments(login):
     connection = get_db()
     cursor = connection.cursor()
-    cursor.execute("select comment from comments where id_client = ?", (user_id,))
+    cursor.execute("select comment from comments where id_client = ?", (login,))
     comments = cursor.fetchall()
     # connection.close()
     # print(f"{comments}")
@@ -155,9 +155,9 @@ def profile():
     login = session.get('login')
     if client_id is not None and login is not None:
         client_info = user_info(client_id)
-        comments = get_comments(client_id)
+        comments = get_comments(login)
+        print(comments)
         favorites = favorite(login)
-        print(favorites)
         # print(f"{comments}")
         # fav_d = favorite(client_id)
         client_id, first_name, last_name, email, login, password, visits = client_info 
