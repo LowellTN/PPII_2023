@@ -12,10 +12,6 @@ DATABASE = 'data/info.db'
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 app.secret_key = '23343243'
-comments_list = [
-    ["User1", "2022-01-14", "110", "This is a comment about the waste sorting center."],
-    ["User2", "2022-01-15", "010", "Another user's comment about the waste sorting center."],
-]
 
 def get_db():
 	db = getattr(g, '_database', None)
@@ -47,7 +43,11 @@ def dons():
 def comments(center_id):
     conn = get_db()
     c = conn.cursor()
+<<<<<<< HEAD
     c.execute("SELECT u.last_name, u.first_name, c.date, c.waste_type, c.comment FROM comments as c, users as u WHERE c.center_id = (?) AND c.id_client = u.login;", (center_id,)) 
+=======
+    c.execute("SELECT u.last_name, u.first_name, c.date, c.waste_type, c.comment FROM comments as c, users as u WHERE c.center_id = (?) AND c.login = u.login;", (center_id,)) 
+>>>>>>> origin
     comments_list = c.fetchall()
     print(comments_list)
     c.execute("SELECT name FROM centers WHERE id = (?)", (center_id,))
@@ -55,8 +55,13 @@ def comments(center_id):
     if center_name:
         center_name = center_name[0]
     else:
+<<<<<<< HEAD
          return redirect(url_for('homepage'))
     return render_template("comments.html", comments = comments_list, center_name = center_name, center_id = center_id)
+=======
+        return redirect(url_for("homepage"))
+    return render_template("comments.html", comments = comments_list, center_name = center_name, id = center_id)
+>>>>>>> origin
 
 @app.route("/<int:center_id>/add_comment", methods = ["POST"])
 def add_comment(center_id):
@@ -66,6 +71,7 @@ def add_comment(center_id):
         waste_types = ', '.join(request.form.getlist('wasteType')) + '.'
         comment_text = request.form['commentText']
         if not waste_types:
+<<<<<<< HEAD
             return "Merci de sélectionner au moins un type de déchets", 400
         date = get_current_date()
         conn = get_db()
@@ -75,13 +81,27 @@ def add_comment(center_id):
     else:
         return "User not logged in"
     return redirect(url_for("comments", center_id = center_id))
+=======
+              return "Merci de sélectionner au moins un type de déchets", 400
+        date = get_current_date()
+        conn = get_db()
+        c = conn.cursor()
+        c.execute("INSERT INTO comments (id_client, waste_type, comment, date, center_id) VALUES (?,?,?,?,?);", (login, waste_types, comment_text, date, center_id))
+        conn.commit()
+    else:
+        return "User not logged in"
+    return redirect(url_for("comments", center_id=center_id))
+>>>>>>> origin
 
 def get_current_date():
     now = datetime.datetime.now()
     return now.strftime("%Y-%m-%d")
 
+<<<<<<< HEAD
       
 
+=======
+>>>>>>> origin
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
     if request.method == 'POST':
