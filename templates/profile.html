@@ -1,19 +1,23 @@
 <html>
 <head>
     <meta charset="utf-8">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>Profile</title>
     <link rel="stylesheet" type="text/css" href="static/styles/profile.css">
 </head>
 <body>
-    <h1>Profil de l'utilisateur</h1>
+    <a href="/" class="logo"><img src="./static/images/Logo_PPII.svg" alt="Logo" height="60px" width="225px"></a>
+    <nav class="navbar"><h1>Profil de l'utilisateur</h1></nav>
+    <div class="info">
     <div class = "container">
-        <section class="profile">
-     <img src="static/images/avatar.jpg" alt="" class="avatar">
-      </div>
-      <div class="nom-prenom">
-        <p>{{first_name}} {{last_name}}</p>
-      </div>
+    <section class="profile">
+    <img src="static/images/avatar.jpg" alt="" class="avatar">
+    </div>
+    <div class="nom-prenom">
+    <p>{{first_name}} {{last_name}}</p>
+    </div>
     <div class = "user-details">
         <table>
         <tr>
@@ -44,5 +48,6 @@
     <p>{{visits}}</p>
     <br>
     <a href="/" class="return-home-btn">Retour</a>
+</div>
 </body>
 </html>
