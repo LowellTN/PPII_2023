@@ -9,34 +9,33 @@
 </head>
 <body>
     <h1>Commentaires du centre {{center_name}}</h1>
-
     <div id="commentForm">
-        <h2>Ajouter un commentaire</h2>
+            <h2>Ajouter un commentaire</h2>
             <h3>Types de déchets acceptés par le centre</h3>
-            <form action="url_for('/' + '{{center_id}}' + '/add_comment')" method="post" id="addCommentForm">
+            <form action="/{{id}}/add_comment" method="post" id="addCommentForm">
 
             <label>
-                <input type="checkbox" name="wasteType" value="1"> Ordures ménagères résiduelles
+                <input type="checkbox" name="wasteType" value="Ordures ménagères résiduelles"> Ordures ménagères résiduelles
             </label>
             <br>
             <label>
-                <input type="checkbox" name="wasteType" value="2"> Emballages recyclables
+                <input type="checkbox" name="wasteType" value="Emballages recyclables"> Emballages recyclables
             </label>
             <br>
             <label>
-                <input type="checkbox" name="wasteType" value="2"> Verre
+                <input type="checkbox" name="wasteType" value="Verre"> Verre
             </label>
             <br>
-                <input type="checkbox" name="wasteType" value="2"> Encombrants 
+                <input type="checkbox" name="wasteType" value="Encombrants"> Encombrants 
             </label>
             <br>
-                <input type="checkbox" name="wasteType" value="2"> Déchets verts
+                <input type="checkbox" name="wasteType" value="Déchets verts"> Déchets verts
             </label>
             <br>
-                <input type="checkbox" name="wasteType" value="2"> Déchets d'Equipement Electriques et Electroniques (DEEE) 
+                <input type="checkbox" name="wasteType" value="Déchets d'Equipement Electriques et Electroniques (DEEE)"> Déchets d'Equipement Electriques et Electroniques (DEEE) 
             </label>
             <br>
-                <input type="checkbox" name="wasteType" value="2"> Déchets dangereux ou non issus des activités de ménage (produits d'entretien), bricolage, jardinage des particuliers 
+                <input type="checkbox" name="wasteType" value="Déchets dangereux ou non issus des activités de ménage (produits d'entretien), bricolage, jardinage des particuliers"> Déchets dangereux ou non issus des activités de ménage (produits d'entretien), bricolage, jardinage des particuliers 
             </label>
             <br>
             <br>
@@ -60,7 +59,7 @@
                     <strong>{{ comment[0] }} {{ comment[1] }}</strong> - {{ comment[2] }}
                 </div>
                 <strong>Types de déchets:</strong> {{ comment[3] }}<br>
-                {{ comment[3] }}
+                {{ comment[4] }}
             </div>
         {% endfor %}
     </div>
